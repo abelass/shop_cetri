@@ -1,0 +1,45 @@
+<paquet
+	prefix="shop_cetri"
+	categorie="squelette"
+	version="1.0.1"
+	etat="dev"
+	compatibilite="[3.0.17;3.0.*]"
+	logo=""
+	documentation=""
+	schema="1.0.0" 
+>
+	<!--
+		Paquet genere le 2014-12-15 17:10:51
+		(Vous pouvez bien entendu supprimer ces commentaires) 
+	-->
+
+	<nom>shop_cetri</nom>
+
+	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur lien='http://websimple.be'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<!--
+		Exemple de commandes
+		* dependances
+		<necessite nom="saisies" compatibilite="[1.21.0;]" />
+		<utilise nom="saisies" compatibilite="[1.21.0;]" />
+		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
+		* pipelines
+		<pipeline nom="autoriser" inclure="shop_cetri_autorisations.php" />
+		<pipeline nom="insert_head" inclure="shop_cetri_pipelines.php" />
+		* declarer un pipeline 
+		<pipeline nom="mon_pipeline" action="" />
+		* parents de menus de SPIP :
+				menu_accueil (A eviter), menu_edition, menu_publication,
+				menu_activite, menu_squelette, menu_administration, menu_configuration 
+		<menu nom="shop_cetri" titre="shop_cetri:shop_cetri_titre" parent="menu_edition"  icone="images/shop_cetri-16.png" />
+		* parents d'onglets... configuration, plugins, statistiques, ... 
+		<onglet nom="shop_cetri" titre="shop_cetri:shop_cetri_titre" parent="configuration" icone="images/shop_cetri-24.png" />
+	-->
+
+
+
+
+</paquet>
