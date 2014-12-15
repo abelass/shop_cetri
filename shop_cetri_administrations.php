@@ -48,7 +48,10 @@ function shop_cetri_upgrade($nom_meta_base_version, $version_cible) {
 	#	array('sql_alter','TABLE spip_xx CHANGE texte petit_texte mediumtext NOT NULL default \'\''),
 	# );
 	# ...
-
+	
+	$maj['1.0.1']  = array(
+		array('sql_alter','TABLE spip_articles CHANGE prix_livre prix float (38,2) NOT NULL'),
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

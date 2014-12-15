@@ -6,7 +6,7 @@
 	compatibilite="[3.0.17;3.0.*]"
 	logo=""
 	documentation=""
-	schema="1.0.0" 
+	schema="1.0.1" 
 >
 	<!--
 		Paquet genere le 2014-12-15 17:10:51
@@ -20,6 +20,10 @@
 
 	<licence>GNU/GPL</licence>
 
+	<pipeline nom="declarer_champs_extras" inclure="base/shop_cetri.php" />	
+	
+	<necessite nom="shop" compatibilite="[1.4.2;]" />
+	
 	<!--
 		Exemple de commandes
 		* dependances
