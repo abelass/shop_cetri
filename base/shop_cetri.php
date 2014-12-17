@@ -2,8 +2,7 @@
 /**
  * Déclarations relatives à la base de données
  *
- * @plugin     Larut
- * @copyright  2013
+ * @plugin     Sh013
  * @author     Rainer Müller
  * @licence    GNU/GPL
  */
