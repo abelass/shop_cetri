@@ -60,47 +60,7 @@
 <!--=== Content Medium Part ===-->
     <div class="content-md margin-bottom-30">
         <div class="container">
-            <form class="shopping-cart" action="#">
-                <div>
-                    <div class="header-tags">            
-                        <div class="overflow-h">
-                            <h2><:panier:></h2>
-                            <p><:panier_controle:></p>
-                            <i class="rounded-x fa fa-check"></i>
-                        </div>    
-                    </div>
-                    <section>
-                        <div class="table-responsive">
-                            	[(#REM) 2 - mon_panier ]
-								<INCLURE{fond=inclure/mon_panier}{env}>	
-                        </div>
-                    </section>
-                    
-                    <div class="header-tags">
-                        <div class="overflow-h">
-                            <h2><:panier_adresse:></h2>
-                            <p><:panier_adresses:></p>
-                            <i class="rounded-x fa fa-home"></i>
-                        </div>    
-                    </div>
-                    <section class="billing-info">
-                        	[(#REM) 3 - mes_coordonnees ]
-                        	[(#SESSION{id_auteur}|non)[(#URL_PAGE{shop}|parametre_url{appel,mes_coordonnees}|lien_ou_expose{<:shop:veuillez_vous_connecter:>})]]
-							<INCLURE{fond=inclure/mes_coordonnees}{env}>			         
-                    </section>
-                        
-                    <div class="header-tags">
-                        <div class="overflow-h">
-                            <h2><:panier_paiement:></h2>
-                            <p><:panier_paiementchoix:></p>
-                            <i class="rounded-x fa fa-credit-card"></i>
-                        </div>    
-                    </div>
-                    <section>
-                        <INCLURE{fond=inclure/paiement,env}>
-                    </section>
-                </div>
-            </form>
+            <INCLURE{fond=content/shop,env,ajax}/>
         </div><!--/end container-->
     </div>
     <!--=== End Content Medium Part ===-->     

@@ -1,0 +1,13 @@
+li.panier a,li.panier a:hover{
+	color: #7c8082;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+li.panier > div{display:inline-block}
+
+.panier_detail{
+	display:none;
+	position:absolute;
+	background:#000000
+	}

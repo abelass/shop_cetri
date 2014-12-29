@@ -22,8 +22,10 @@
 
 	<pipeline nom="declarer_champs_extras" inclure="base/shop_cetri.php" />	
 	
+	
 	<necessite nom="shop" compatibilite="[1.4.2;]" />
 	<necessite nom="shop_livraisons" compatibilite="[1.2.0;]" />	
+	<pipeline nom="insert_head" inclure="shop_cetri_pipelines.php" />
 	
 	<!--
 		Exemple de commandes
