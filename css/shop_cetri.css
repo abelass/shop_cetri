@@ -9,5 +9,6 @@ li.panier > div{display:inline-block}
 .panier_detail{
 	display:none;
 	position:absolute;
-	background:#000000
+	background:#EFEFEF;
 	}
+	
