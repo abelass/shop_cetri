@@ -1,7 +1,7 @@
 #CACHE{0}
 <B_ispanier>
 	<a class="panier_title"><i class="fa fa-shopping-cart"> </i> <:paniers:mon_panier:></a>
-<div class="panier_detail">
+<div class="panier_detail"[(#ENV{voir}|oui) style="display:block;"]>
 <div class="ajax">#FORMULAIRE_PANIER</div>
 	
 <BOUCLE_ispanier(CONDITION){si #SESSION{id_panier}|oui}>
@@ -10,7 +10,13 @@
 	[(#BOUTON_ACTION{<:shop:passer_la_commande:>,[(#URL_PAGE{shop}|parametre_url{appel,mes_coordonnees})],continuer})]
 	<//B_article_suitepanier>
 </div>
+<script type="text/javascript">
+		$('.panier_title').click(function(){
+		$('.panier_detail').slideToggle(800);
+		return false;
+	});   
+</script>
 </BOUCLE_ispanier>
-<div> </div>
+<div class="hidden"> </div>
 <//B_ispanier>
 

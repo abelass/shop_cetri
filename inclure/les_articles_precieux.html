@@ -168,9 +168,9 @@
     $(function(){
         ajaxReload(
         	'mon_panier',{
-        		callback:function(){$('.panier .panier_detail').show(800);},
+        		callback:function(){$('.panier .panier_detail').slideToggle(800);},
 				args:{voir:'oui',action:''},history:false });
-        });      
+        });  
 </script>
 ]
 
