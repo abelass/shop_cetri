@@ -1,6 +1,9 @@
 #CACHE{0}
 <B_ispanier>
-	<a class="panier_title"><i class="fa fa-shopping-cart"> </i> <:paniers:mon_panier:></a>
+	[(#ENV{affichage}|=={banner}|?{
+		<a class="panier_title"><i class="fa fa-shopping-cart"> </i> <:paniers:mon_panier:></a>,
+		<h2><:paniers:mon_panier:></h2>
+	})]
 <div class="panier_detail"[(#ENV{voir}|oui) style="display:block;"]>
 <div class="ajax">#FORMULAIRE_PANIER</div>
 	
