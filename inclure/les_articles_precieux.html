@@ -148,11 +148,6 @@
                         <td><i class="fa fa-euro"></i> [(#PRIX_LIVRE)]
                           ([<small>(#FRAISDEPORT|sinon{<:fraisdeport_compris:>})</small>])</td>
                          <td>
-                         	      <form name="f1" class="product-quantity sm-margin-bottom-20">
-        							<button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty();' value='-'>-</button>
-        							<input type='text' class="quantity-field" name='qty' value="1" id='qty'/>
-        							<button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty").value++;' value='+'>+</button>
-       							</form>
        							<div type="button" class="btn-u "><a class="ajax nocache nohistory" href="[(#URL_ACTION_AUTEUR{remplir_panier,articles-#ID_ARTICLE,#SELF|parametre_url{retour,ok}})]"><:paniers:action_ajouter:></a></div>
 						</td>       							
                       </tr>
