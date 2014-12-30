@@ -6,7 +6,7 @@ li.panier a,li.panier a:hover{
 
 li.panier > div{display:inline-block}
 
-.panier_detail{
+li.panier .panier_detail{
 	display:none;
 	position:absolute;
 	background:#EFEFEF;
