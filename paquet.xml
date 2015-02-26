@@ -1,17 +1,13 @@
 <paquet
 	prefix="shop_cetri"
 	categorie="squelette"
-	version="1.0.1"
+	version="1.1.0"
 	etat="dev"
 	compatibilite="[3.0.17;3.0.*]"
 	logo=""
 	documentation=""
 	schema="1.0.1" 
 >
-	<!--
-		Paquet genere le 2014-12-15 17:10:51
-		(Vous pouvez bien entendu supprimer ces commentaires) 
-	-->
 
 	<nom>shop_cetri</nom>
 
@@ -24,7 +20,8 @@
 	
 	
 	<necessite nom="shop" compatibilite="[1.4.2;]" />
-	<necessite nom="shop_livraisons" compatibilite="[1.2.0;]" />	
+	<necessite nom="shop_livraisons" compatibilite="[1.2.0;]" />
+	<necessite nom="bank" compatibilite="[2.30.2;]" />		
 	<pipeline nom="insert_head" inclure="shop_cetri_pipelines.php" />
 	
 	<!--
