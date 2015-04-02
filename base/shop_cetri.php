@@ -31,4 +31,45 @@ function shop_cetri_declarer_champs_extras($champs = array()) {
 	return $champs;
 
 }
+
+/*champ extra shop -> pour la commande*/
+function shop_cetri_shop_champs_extras($flux) {
+	$flux['commande']['saisies'][]=
+		array(
+                    'saisie' => 'oui_non',// Pour la configuration               
+                    'formulaires' => array('configuer_shop','editer_client'),
+                    'tables'=>array(
+                        'spip_commandes'=>array(
+                            'field'=>array(
+                                'newsletter'=>"varchar(3) NOT NULL"
+                                )
+                             )
+                        ),
+                    'options' => array(
+                        'li_class'=>'conditionnel',
+
+                        'nom' => 'commande_newsletter',// Pour la configuration
+                        'nom_2' => 'newsletter',// Pour le formulaire public                          
+                        'label' => _T('label_inscrire_newsletter'),
+                        'defaut' => isset($defaut['commande_newsletter'])?$defaut['commande_newsletter']:'',
+
+                    )
+
+	 
+                );
+	$flux['commande']['saisies'][]=
+		                array(
+                    'saisie' => 'oui_non',
+                    'formulaires' => array('configuer_shop'),
+                    'options' => array(
+                        'li_class'=>'conditionnel last',
+                        'nom' => 'newsletter_obligatoire',
+                        'label' => _T('saisies:option_obligatoire_label'),
+                        'defaut' => isset($defaut['newsletter_obligatoire'])?$defaut['newsletter_obligatoire']:'',
+                        'afficher_si' => '@commande_newsletter@ == "on"',
+                    )
+                );
+				
+	return $flux;
+}
 ?>

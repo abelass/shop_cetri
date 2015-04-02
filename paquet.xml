@@ -6,7 +6,7 @@
 	compatibilite="[3.0.17;3.0.*]"
 	logo=""
 	documentation=""
-	schema="1.0.1" 
+	schema="1.1.0" 
 >
 
 	<nom>shop_cetri</nom>
@@ -21,8 +21,10 @@
 	
 	<necessite nom="shop" compatibilite="[1.4.2;]" />
 	<necessite nom="shop_livraisons" compatibilite="[1.2.0;]" />
-	<necessite nom="bank" compatibilite="[2.30.2;]" />		
+	<necessite nom="bank" compatibilite="[2.30.2;]" />	
+		
 	<pipeline nom="insert_head" inclure="shop_cetri_pipelines.php" />
+	<pipeline nom="shop_champs_extras" inclure="base/shop_cetri.php" />	
 	
 	<!--
 		Exemple de commandes
