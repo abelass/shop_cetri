@@ -1,7 +1,7 @@
 <paquet
 	prefix="shop_cetri"
 	categorie="squelette"
-	version="1.2.0"
+	version="1.2.1"
 	etat="dev"
 	compatibilite="[3.0.17;3.0.*]"
 	logo=""
@@ -20,7 +20,6 @@
 	
 	
 	<necessite nom="shop" compatibilite="[1.4.2;]" />
-	<necessite nom="shop_livraisons" compatibilite="[1.2.0;]" />
 	<necessite nom="bank" compatibilite="[2.30.2;]" />	
 		
 	<pipeline nom="insert_head" inclure="shop_cetri_pipelines.php" />
