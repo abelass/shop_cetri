@@ -50,7 +50,7 @@ function shop_cetri_shop_champs_extras($flux) {
 
                         'nom' => 'commande_newsletter',// Pour la configuration
                         'nom_2' => 'newsletter',// Pour le formulaire public                          
-                        'label' => _T('label_inscrire_newsletter'),
+                        'label' => _T('shop_cetri:label_inscrire_newsletter'),
                         'defaut' => isset($defaut['commande_newsletter'])?$defaut['commande_newsletter']:'',
 
                     )
