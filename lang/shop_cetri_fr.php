@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
-	'label_inscrire_newsletter'=>'Je m\'inscris à la newsletter',
+	'label_inscrire_newsletter'=>'Je m\'inscris à la newsletter :',
 	
 	//P
 	'passer_panier'=>'Passer au panier',
