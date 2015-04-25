@@ -7,6 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_inscrire_newsletter'=>'Je m\'inscris à la newsletter',
+	
+	//P
+	'passer_panier'=>'Passer au panier',
 
 	// S
 	'shop_cetri_titre' => 'shop_cetri',
