@@ -34,7 +34,8 @@ function shop_cetri_declarer_champs_extras($champs = array()) {
 
 /*champ extra shop -> pour la commande*/
 function shop_cetri_shop_champs_extras($flux) {
-	$flux['commande']['saisies'][]=
+	$defaut=$flux['args'];
+	$flux['data']['commande']['saisies'][]=
 		array(
                     'saisie' => 'oui_non',// Pour la configuration               
                     'formulaires' => array('configuer_shop','editer_client'),
@@ -57,7 +58,7 @@ function shop_cetri_shop_champs_extras($flux) {
 
 	 
                 );
-	$flux['commande']['saisies'][]=
+	$flux['data']['commande']['saisies'][]=
 		                array(
                     'saisie' => 'oui_non',
                     'formulaires' => array('configuer_shop'),
