@@ -33,7 +33,7 @@ function shop_cetri_declarer_champs_extras($champs = array()) {
 }
 
 /*champ extra shop -> pour la commande*/
-function shop_cetri_shop_champs_extras($flux) {
+function inc_shop_cetri_shop_champs_extras($flux) {
 	$defaut=$flux['args'];
 	
 	$flux['data']['commande']['saisies'][]=
