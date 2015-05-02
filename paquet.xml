@@ -16,12 +16,10 @@
 
 	<licence>GNU/GPL</licence>
 
-	<pipeline nom="declarer_champs_extras" inclure="base/shop_cetri.php" />	
-	
-	
-	<necessite nom="shop" compatibilite="[1.4.2;]" />
+	<necessite nom="shop" compatibilite="[1.10.2;]" />
 	<necessite nom="bank" compatibilite="[2.30.2;]" />	
-		
+	
+	<pipeline nom="declarer_champs_extras" inclure="base/shop_cetri.php" />		
 	<pipeline nom="insert_head" inclure="shop_cetri_pipelines.php" />
 	<pipeline nom="shop_champs_extras" inclure="base/shop_cetri.php" />	
 	
