@@ -1,9 +1,9 @@
 <paquet
 	prefix="shop_cetri"
 	categorie="squelette"
-	version="1.2.3"
+	version="1.2.4"
 	etat="dev"
-	compatibilite="[3.0.17;3.1.*]"
+	compatibilite="[3.0.17;3.2.*]"
 	logo=""
 	documentation=""
 	schema="1.1.1"
