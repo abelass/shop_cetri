@@ -1,12 +1,12 @@
 <paquet
 	prefix="shop_cetri"
 	categorie="squelette"
-	version="1.2.4"
+	version="1.3.0"
 	etat="dev"
 	compatibilite="[3.0.17;3.2.*]"
 	logo=""
 	documentation=""
-	schema="1.1.1"
+	schema="1.2.3"
 >
 
 	<nom>shop_cetri</nom>
@@ -16,8 +16,9 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="shop" compatibilite="[1.10.2;]" />
-	<necessite nom="bank" compatibilite="[2.30.2;]" />
+	<necessite nom="shop" compatibilite="[1.10.7;]" />
+	<necessite nom="bank" compatibilite="[3.5.9;]" />
+	<necessite nom="declinaisons" compatibilite="[1.0.10;]" />
 
 
 	<pipeline nom="declarer_champs_extras" inclure="base/shop_cetri.php" />

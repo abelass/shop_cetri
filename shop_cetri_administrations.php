@@ -20,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * - créer la structure SQL,
  * - insérer du pre-contenu,
  * - installer des valeurs de configuration,
- * - mettre à jour la structure SQL 
+ * - mettre à jour la structure SQL
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
@@ -30,53 +30,71 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function shop_cetri_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
-	# quelques exemples
-	# (que vous pouvez supprimer !)
-	# 
-	# $maj['create'] = array(array('creer_base'));
-	#
-	# include_spip('inc/config')
-	# $maj['create'] = array(
-	#	array('maj_tables', array('spip_xx', 'spip_xx_liens')),
-	#	array('ecrire_config', array('shop_cetri', array('exemple' => "Texte de l'exemple")))
-	#);
-	#
-	# $maj['1.1.0']  = array(array('sql_alter','TABLE spip_xx RENAME TO spip_yy'));
-	# $maj['1.2.0']  = array(array('sql_alter','TABLE spip_xx DROP COLUMN id_auteur'));
-	# $maj['1.3.0']  = array(
-	#	array('sql_alter','TABLE spip_xx CHANGE numero numero int(11) default 0 NOT NULL'),
-	#	array('sql_alter','TABLE spip_xx CHANGE texte petit_texte mediumtext NOT NULL default \'\''),
-	# );
-	# ...
-	
+
 	$maj['1.0.1']  = array(
 		array('sql_alter','TABLE spip_articles CHANGE prix_livre prix float (38,2) NOT NULL'),
 	);
+
+	$maj['1.2.3']  = array(
+		array('convertir_prix'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
-
 /**
  * Fonction de désinstallation du plugin shop_cetri.
- * 
+ *
  * Vous devez :
  *
  * - nettoyer toutes les données ajoutées par le plugin et son utilisation
- * - supprimer les tables et les champs créés par le plugin. 
+ * - supprimer les tables et les champs créés par le plugin.
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @return void
 **/
 function shop_cetri_vider_tables($nom_meta_base_version) {
-	# quelques exemples
-	# (que vous pouvez supprimer !)
-	# sql_drop_table("spip_xx");
-	# sql_drop_table("spip_xx_liens");
-
 
 	effacer_meta($nom_meta_base_version);
 }
 
-?>
+function convertir_prix() {
+	include_spip('inc/editer');
+	$declinaisons = array('Version papier', 'EPUB', 'PDF');
+
+	foreach ($declinaisons AS $titre) {
+		set_request('titre', $titre);
+		set_request('statut', 'publie');
+		$declinaisons[$titre] = formulaires_editer_objet_traiter('declinaison', 'new');
+	}
+
+	spip_log($declinaisons, 'teste');
+
+	$titre_declinaison_defaut = $declinaisons[0];
+
+	$sql = sql_select('prix,id_article,titre', 'spip_articles', 'prix > 0');
+
+	while ($data = sql_fetch($sql)) {
+
+		$titre = $data['titre'];
+		$titre_secondaire = $titre_declinaison_defaut;
+
+		$titre = $titre . ' - ' . $titre_secondaire;
+
+		// On inscrit dans la bd
+		$valeurs = array(
+			'id_declinaison' => $declinaisons[$titre_declinaison_defaut]['id_declinaison'],
+			'id_objet' => $data['id_article'],
+			'objet' => 'article',
+			'code_devise' => 'EUR',
+			'titre' => $titre,
+			'prix' => $data['prix'],
+		);
+
+		$prix_objets = sql_insertq('spip_prix_objets', $valeurs);
+
+		spip_log($prix_objets, 'teste');
+	}
+}
