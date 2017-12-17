@@ -35,8 +35,11 @@ function shop_cetri_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter','TABLE spip_articles CHANGE prix_livre prix float (38,2) NOT NULL'),
 	);
 
-	$maj['1.2.3']  = array(
+	$maj['2.0.3']  = array(
 		array('convertir_prix'),
+		array('sql_alter','TABLE spip_articles DROP COLUMN prix'),
+		array ('maj_tables', array ('spip_articles','spip_commandes'),
+		),
 	);
 
 	include_spip('base/upgrade');
@@ -60,6 +63,10 @@ function shop_cetri_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
 }
 
+/**
+ * Convertir les prix contenus dans le camps extras prix/article en prix objet avec la déclinaison
+ * "Version papier"
+ */
 function convertir_prix() {
 	include_spip('inc/editer');
 	$declinaisons = array('Version papier', 'EPUB', 'PDF');
@@ -69,8 +76,6 @@ function convertir_prix() {
 		set_request('statut', 'publie');
 		$declinaisons[$titre] = formulaires_editer_objet_traiter('declinaison', 'new');
 	}
-
-	spip_log($declinaisons, 'teste');
 
 	$titre_declinaison_defaut = $declinaisons[0];
 
@@ -94,7 +99,5 @@ function convertir_prix() {
 		);
 
 		$prix_objets = sql_insertq('spip_prix_objets', $valeurs);
-
-		spip_log($prix_objets, 'teste');
 	}
 }
