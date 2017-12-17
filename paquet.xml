@@ -6,7 +6,7 @@
 	compatibilite="[3.0.17;3.2.*]"
 	logo=""
 	documentation=""
-	schema="2.0.3"
+	schema="2.0.0"
 >
 
 	<nom>shop_cetri</nom>

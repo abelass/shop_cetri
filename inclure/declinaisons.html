@@ -1,0 +1,13 @@
+[(#PLUGIN{declinaisons}|oui)#SET{declinaisons,oui}]
+<B_objets_precieux>
+<div class="vente liste_objets_precieux">
+	#ANCRE_PAGINATION
+	<h2><:shop:les_articles_precieux:></h2>
+	<ul class="liste-items objets_precieux">
+		<BOUCLE_objets_precieux(PRIX_OBJETS){fusion id_objet}{pagination}{par titre}>
+			[(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_prix_objet,#ID_PRIX_OBJET},inclure/objet_precieux_detail_declinaison})]
+		</BOUCLE_objets_precieux>
+	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_objets_precieux>
