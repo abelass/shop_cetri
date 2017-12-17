@@ -8,9 +8,8 @@
  * @licence    GNU/GPL
  * @package    SPIP\Shop_cetri\Installation
  */
-
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (! defined('_ECRIRE_INC_VERSION'))
+	return;
 
 /**
  * Fonction d'installation et de mise à jour du plugin shop_cetri.
@@ -23,23 +22,39 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * - mettre à jour la structure SQL
  *
  * @param string $nom_meta_base_version
- *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ *        	Nom de la meta informant de la version du schéma de données du
+ *        	plugin installé dans SPIP
  * @param string $version_cible
- *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
+ *        	Version du schéma de données dans ce plugin (déclaré dans
+ *        	paquet.xml)
  * @return void
-**/
+ *
+ */
 function shop_cetri_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
-	$maj['1.0.1']  = array(
-		array('sql_alter','TABLE spip_articles CHANGE prix_livre prix float (38,2) NOT NULL'),
+	$maj['1.0.1'] = array(
+		array(
+			'sql_alter',
+			'TABLE spip_articles CHANGE prix_livre prix float (38,2) NOT NULL'
+		)
 	);
 
-	$maj['2.0.3']  = array(
-		array('convertir_prix'),
-		array('sql_alter','TABLE spip_articles DROP COLUMN prix'),
-		array ('maj_tables', array ('spip_articles','spip_commandes'),
+	$maj['2.0.0'] = array(
+		array(
+			'convertir_prix'
 		),
+		array(
+			'sql_alter',
+			'TABLE spip_articles DROP COLUMN prix'
+		),
+		array(
+			'maj_tables',
+			array(
+				'spip_articles',
+				'spip_commandes'
+			)
+		)
 	);
 
 	include_spip('base/upgrade');
@@ -55,26 +70,33 @@ function shop_cetri_upgrade($nom_meta_base_version, $version_cible) {
  * - supprimer les tables et les champs créés par le plugin.
  *
  * @param string $nom_meta_base_version
- *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ *        	Nom de la meta informant de la version du schéma de données du
+ *        	plugin installé dans SPIP
  * @return void
-**/
+ *
+ */
 function shop_cetri_vider_tables($nom_meta_base_version) {
-
 	effacer_meta($nom_meta_base_version);
 }
 
 /**
- * Convertir les prix contenus dans le camps extras prix/article en prix objet avec la déclinaison
+ * Convertir les prix contenus dans le camps extras prix/article en prix objet
+ * avec la déclinaison
  * "Version papier"
  */
 function convertir_prix() {
 	include_spip('inc/editer');
-	$declinaisons = array('Version papier', 'EPUB', 'PDF');
+	$declinaisons = array(
+		'Version papier',
+		'EPUB',
+		'PDF'
+	);
 
-	foreach ($declinaisons AS $titre) {
+	foreach ($declinaisons as $titre) {
 		set_request('titre', $titre);
 		set_request('statut', 'publie');
-		$declinaisons[$titre] = formulaires_editer_objet_traiter('declinaison', 'new');
+		$declinaisons[$titre] = formulaires_editer_objet_traiter('declinaison',
+				'new');
 	}
 
 	$titre_declinaison_defaut = $declinaisons[0];
@@ -83,7 +105,7 @@ function convertir_prix() {
 
 	while ($data = sql_fetch($sql)) {
 
-		$titre = $data['titre'];
+		$titre = supprimer_numero($data['titre']);
 		$titre_secondaire = $titre_declinaison_defaut;
 
 		$titre = $titre . ' - ' . $titre_secondaire;
@@ -95,7 +117,7 @@ function convertir_prix() {
 			'objet' => 'article',
 			'code_devise' => 'EUR',
 			'titre' => $titre,
-			'prix' => $data['prix'],
+			'prix' => $data['prix']
 		);
 
 		$prix_objets = sql_insertq('spip_prix_objets', $valeurs);
