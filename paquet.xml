@@ -18,9 +18,12 @@
 	<necessite nom="shop" compatibilite="[1.10.7;]" />
 	<necessite nom="bank" compatibilite="[3.5.9;]" />
 	<necessite nom="declinaisons" compatibilite="[1.0.10;]" />
+	<necessite nom="notifavancees" compatibilite="[0.4.0;]" />
+	<necessite nom="facteur" compatibilite="[3.5.0;]" />
+	<necessite nom="iextras" compatibilite="[3.5.3;]" />
 
 	<utilise nom="commandes" compatibilite="[1.15.3;]" />
-	<utilise nom="notifavancees" compatibilite="[0.4.0;]" />
+
 
 	<pipeline nom="declarer_tables_principales" inclure="base/shop_cetri.php" />
 </paquet>

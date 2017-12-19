@@ -15,6 +15,8 @@ if (!defined('_ECRIRE_INC_VERSION'))
 function notifications_modes_email_envoyer($contact, $contenu, $options) {
 	spip_log('email cetr', 'teste');
 	spip_log($options, 'teste');
+	spip_log($contenu, 'teste');
+	spip_log($contact, 'teste');
 
 	// S'il y a le plugin Facteur, on peut faire un truc plus propre
 	if (defined('_DIR_PLUGIN_FACTEUR')) {
