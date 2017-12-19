@@ -12,34 +12,35 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function notifications_commande_client_dist($quoi, $id_commande, $options) {
-	spip_log('commande gener cetr', 'teste');
-	spip_log($quoi, 'teste');
-	spip_log($id_commande, 'teste');
-	spip_log($options, 'teste');
+function notifications_commande_client_contenu_dist($id_commande, $options, $destinataire, $mode) {
+	$donnees_objet = sql_fetsel('id_objet, objet', 'spip_commandes_details', 'id_commande=' . $id_commande);
+	if ($donnees_objet['objet'] == 'prix_objet') {
+		$donnes_prix = sql_fetsel(
+				'po.objet,po.id_objet,d.titre',
+				'spip_prix_objets AS po LEFT JOIN spip_declinaisons AS d USING(id_declinaison)',
+				'po.id_prix_objet=' .$donnees_objet['id_objet']);
 
-	$o['pieces_jointes'][] = array(
-		'chemin' => $chemin,
-		'nom' => $nom,
-		'encodage' => 'base64',
-		'mime' => $doc['mime_type']
-	);
+		$titre = strtolower($donnes_prix['titre']);
+		$doc = sql_fetsel('*',
+				'spip_documents_liens LEFT JOIN spip_documents USING (id_document) LEFT JOIN spip_types_documents USING(extension)',
+				'objet LIKE' . sql_quote($donnes_prix['objet']) . ' AND id_objet=' . $donnes_prix['id_objet'] . ' AND extension LIKE ' . sql_quote($titre));
+		$fichier = $doc['fichier'];
+		list($extension, $nom) = explode('/', $fichier);
+		$chemin = realpath(_DIR_IMG . $fichier);
 
-	$corps = array(
-		'html' => 'teste conteu',
-		'pieces_jointes' => array(
-			array(
-				'chemin' => 'sites/cetri/IMG/pdf/collin_de_plancy_berthe_au_grand_pied.pdf',
-				'nom' => $nom,
-				'encodage' => 'base64',
-				'mime' => $doc['mime_type']
+		$corps = array(
+			'pieces_jointes' => array(
+				array(
+					'chemin' => $chemin,
+					'nom' => $nom,
+					'encodage' => 'base64',
+					'mime' => $doc['mime_type']
+				),
 			),
-		),
-	);
+		);
 
-	$envoyer_mail = charger_fonction('envoyer_mail', 'inc/');
-	return $envoyer_mail('abelass2@websimple.be', 'teste', $corps);
-
+		return $corps;
+	}
 }
 
 /**

@@ -13,11 +13,6 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 // Envoi le contenu par email
 function notifications_modes_email_envoyer($contact, $contenu, $options) {
-	spip_log('email cetr', 'teste');
-	spip_log($options, 'teste');
-	spip_log($contenu, 'teste');
-	spip_log($contact, 'teste');
-
 	// S'il y a le plugin Facteur, on peut faire un truc plus propre
 	if (defined('_DIR_PLUGIN_FACTEUR')) {
 		$corps = array(
@@ -35,6 +30,11 @@ function notifications_modes_email_envoyer($contact, $contenu, $options) {
 		if ($contenu['nom_envoyeur']) {
 			$corps['nom_envoyeur'] = $contenu['nom_envoyeur'];
 		}
+
+		if ($contenu['pieces_jointes']) {
+			$corps['pieces_jointes'] = $contenu['pieces_jointes'];
+		}
+
 		// S'il y a un Reply-to
 		if ($options['repondre_a']) {
 			$corps['repondre_a'] = $options['repondre_a'];
