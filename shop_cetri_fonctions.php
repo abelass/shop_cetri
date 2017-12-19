@@ -258,5 +258,3 @@ function inc_shop_champs_extras($defaut = array()) {
 
 	return $champs_extras;
 }
-
-?>
