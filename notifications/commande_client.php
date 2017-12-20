@@ -12,6 +12,21 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Ajoute le document correspondant à la commande
+ *
+ * @param int $id_commande
+ *     Identifiant de la commande
+ * @param array $options
+ *     options
+ * @param array $destinataires
+ *     les destinataires
+ * @param string $mode
+ *     le mode e'envoi
+ *
+ * @return array
+ *     Le contenu additionel
+ */
 function notifications_commande_client_contenu_dist($id_commande, $options, $destinataire, $mode) {
 	$donnees_objet = sql_fetsel('id_objet, objet', 'spip_commandes_details', 'id_commande=' . $id_commande);
 	if ($donnees_objet['objet'] == 'prix_objet') {
@@ -38,7 +53,6 @@ function notifications_commande_client_contenu_dist($id_commande, $options, $des
 				),
 			),
 		);
-
 		return $corps;
 	}
 }
