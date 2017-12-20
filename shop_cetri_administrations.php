@@ -105,7 +105,7 @@ function convertir_prix() {
 
 	while ($data = sql_fetch($sql)) {
 
-		$titre = supprimer_numero($data['titre']);
+		$titre = extraire_multi(supprimer_numero($data['titre']));
 		$titre_secondaire = $titre_declinaison_defaut;
 
 		$titre = $titre . ' - ' . $titre_secondaire;
