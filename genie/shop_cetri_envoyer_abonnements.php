@@ -20,7 +20,6 @@ if (!defined('_ECRIRE_INC_VERSION'))
 function genie_shop_cetri_envoyer_abonnements_dist($t) {
 	$date = date('Y-m-d H:i:s', time());
 	$article_abonnement = sql_fetsel('date_envoi_abonnement,id_article', 'spip_articles', 'page LIKE "abonnement"');
-	spip_log($article_abonnement, 'teste');
 	$id_article = $article_abonnement['id_article'];
 	$date_envoi_abonnement = $article_abonnement['date_envoi_abonnement'];
 
@@ -47,7 +46,6 @@ function genie_shop_cetri_envoyer_abonnements_dist($t) {
 			spip_log($donnees_commandes, 'teste');
 		}
 	}
-
 
 	return 1;
 }
