@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+
+<title><:bank:titre_reglement_attente:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+
+
+
+<meta name="robots" content="none" />
+
+<INCLURE{fond=inclure/head} />
+
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+
+</head>
+
+<body class="pas_surlignable page_recherche">
+		<div class="wrapper">
+
+<!--=== Header ===-->
+		<div class="header">
+					<INCLURE{fond=inclure/topbar} {env} {ajax}{lang_select=non} />
+					<INCLURE{fond=inclure/header} {env} {ajax} {lang_select=non}  />
+		</div>
+<!--=== End Header ===-->
+
+
+<!--=== Breadcrumbs v3 ===-->
+		<div class="breadcrumbs-v3">
+				<div class="container">
+						<h1 class="pull-left"><:bank:titre_reglement_attente:></h1>
+						<ul class="pull-right breadcrumb">
+								<li>
+										<a href="#URL_PAGE{sommaire}"><:accueil:></a>
+								</li>
+								<li>
+										<:bank:titre_reglement_attente:>
+								</li>
+						</ul>
+				</div>
+		</div>
+<!--=== End Breadcrumbs v3 ===-->
+
+
+
+<!--=== Search Results ===-->
+		<div class="container s-results margin-bottom-50">
+		<BOUCLE_message(TRANSACTIONS){id_transaction}{transaction_hash}>[
+			(#MESSAGE|propre)
+		][(#MODE|bank_afficher_attente_reglement{#ID_TRANSACTION,#TRANSACTION_HASH,#ENV{type}})]
+		</BOUCLE_message>
+		<p><:bank:confirme_reglement_attente:></p>
+		<//B_message>
+		</div><!--/container-->
+		<!--=== End Search Results ===-->
+
+
+
+[(#REM) Footer ]
+		<INCLURE{fond=inclure/footer} {ajax}>
+
+
+</div><!--/wrapper-->
+
+
+<!-- JS Global Compulsory -->
+
+<script type="text/javascript" src="unify/assets/plugins/jquery/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="unify/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- JS Implementing Plugins -->
+<script type="text/javascript" src="unify/assets/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="unify/assets/plugins/image-hover/js/modernizr.js"></script>
+<script type="text/javascript" src="unify/assets/plugins/image-hover/js/touch.js"></script>
+
+<!-- JS Customization -->
+<script src="unify/assets/js/custom.js"></script>
+<!-- JS Page Level -->
+<script type="text/javascript" src="unify/assets/js/app.js"></script>
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+				App.init();
+		});
+</script>
+<!--[if lt IE 9]>
+		<script src="unify/assets/plugins/respond.js"></script>
+<![endif]-->
+
+
+
+
+
+</body>
+</html>
