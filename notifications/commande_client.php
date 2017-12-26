@@ -38,7 +38,10 @@ function notifications_commande_client_contenu_dist($id_commande, $options, $des
 		$titre = strtolower($donnes_prix['titre']);
 		$doc = sql_fetsel('*',
 				'spip_documents_liens LEFT JOIN spip_documents USING (id_document) LEFT JOIN spip_types_documents USING(extension)',
-				'objet LIKE' . sql_quote($donnes_prix['objet']) . ' AND id_objet=' . $donnes_prix['id_objet'] . ' AND extension LIKE ' . sql_quote($titre));
+				'objet LIKE' . sql_quote($donnes_prix['objet']) . ' AND
+					id_objet=' . $donnes_prix['id_objet'] . ' AND
+					id_objet!=3830 AND
+					extension LIKE ' . sql_quote($titre));
 		$fichier = $doc['fichier'];
 		list($extension, $nom) = explode('/', $fichier);
 		$chemin = realpath(_DIR_IMG . $fichier);
