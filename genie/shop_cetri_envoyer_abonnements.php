@@ -54,6 +54,15 @@ function genie_shop_cetri_envoyer_abonnements_dist($t) {
 						d.date > c.date_envoi AND
 						DATE_ADD(c.date, INTERVAL 1 YEAR) >="' . $date .'"');
 			while ($data = sql_fetch($sql)) {
+				if (isset($data['dates_envoi'])) {
+					$dates_envoi = json_decode($data['dates_envoi']);
+					$dates_envoi[] = $date;
+				}
+				else {
+					$dates_envoi = array($date);
+				}
+
+				$dates_envoi = json_encode($dates_envoi);
 				$options['id_commande'] = $data['id_commande'];
 				$message = recuperer_fond('notifications/contenu_abonnement_mail', $options);
 				$fichier = $data['fichier'];
@@ -70,6 +79,12 @@ function genie_shop_cetri_envoyer_abonnements_dist($t) {
 						),
 					),
 				));
+				sql_updateq('spip_commandes',
+						array(
+							'date_envoi' => $date,
+							'dates_envoi' => $dates_envoi
+						),
+						'id_commande=' . $data['id_commande']);
 			}
 		}
 
