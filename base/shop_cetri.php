@@ -11,9 +11,6 @@ if (! defined('_ECRIRE_INC_VERSION'))
 
 function shop_cetri_declarer_tables_principales($tables_principales) {
 
-	$tables_principales['spip_articles'] = array(
-		'field' => array('date_envoi_abonnement'=>"datetime NOT NULL DEFAULT '0000-00-00 00:00:00'"),
-	);
 	$tables_principales['spip_commandes'] = array(
 		'field' => array('dates_envoi'=>"text NOT NULL"),
 	);

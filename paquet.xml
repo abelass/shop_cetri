@@ -25,7 +25,6 @@
 
 	<utilise nom="commandes" compatibilite="[1.15.3;]" />
 
-	<pipeline nom="declarer_tables_principales" inclure="base/shop_cetri.php" />
 	<pipeline nom="taches_generales_cron" inclure="shop_cetri_pipelines.php" />
 
 </paquet>

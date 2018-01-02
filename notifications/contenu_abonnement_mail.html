@@ -32,10 +32,3 @@
 <p><a href="#URL_SITE_SPIP">#URL_SITE_SPIP</a></p>
 </body>
 </BOUCLE_art>
-
-[(#ENV{format_envoi}|=={plain}|oui)
-	#FILTRE{supprimer_tags|filtrer_entites|trim}]
-[(#ENV{format_envoi}|=={plain}|non)
-	#FILTRE{filtrer_entites|trim}]
-
-#FILTRE{facteur_email_wrap_to_html}
