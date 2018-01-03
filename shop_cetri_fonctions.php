@@ -11,45 +11,6 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-// Envoi le contenu par email
-function notifications_modes_email_envoyer($contact, $contenu, $options) {
-	// S'il y a le plugin Facteur, on peut faire un truc plus propre
-	if (defined('_DIR_PLUGIN_FACTEUR')) {
-		$corps = array(
-			'texte' => $contenu['texte']
-		);
-		// Si on a une version HTML
-		if ($contenu['html']) {
-			$corps['html'] = $contenu['html'];
-		}
-		// si un expéditeur est défini
-		if ($contenu['from']) {
-			$corps['from'] = $contenu['from'];
-		}
-		// si un nom d'expéditeur est défini
-		if ($contenu['nom_envoyeur']) {
-			$corps['nom_envoyeur'] = $contenu['nom_envoyeur'];
-		}
-
-		if ($contenu['pieces_jointes']) {
-			$corps['pieces_jointes'] = $contenu['pieces_jointes'];
-		}
-
-		// S'il y a un Reply-to
-		if ($options['repondre_a']) {
-			$corps['repondre_a'] = $options['repondre_a'];
-			if ($options['nom_repondre_a']) {
-				$corps['nom_repondre_a'] = $options['nom_repondre_a'];
-			}
-		}
-	} // Sinon c'est juste le texte
-	else {
-		$corps = $contenu['texte'];
-	}
-
-	$envoyer_mail = charger_fonction('envoyer_mail', 'inc/');
-	return $envoyer_mail($contact, $contenu['court'], $corps);
-}
 function inc_shop_champs_extras($defaut = array()) {
 	if (count($defaut) == 0) {
 		include_spip('inc/config');
