@@ -57,7 +57,6 @@
 					[(#DESCRIPTIF*|extraire_multi)] (#REFERENCE - [(#DATE|affdate)])
 				<BOUCLE_prix(prix_objets){id_prix_objet=#ID_OBJET} {objet=article}>
 					<BOUCLE_abonnements(ARTICLES){id_article=#ID_OBJET}{page=abonnement}>
-					#TITRE
 						#SET{debut_abonnement,#GET{date_commande}}
 						#SET{fin_abonnement,#GET{date_commande}|date_future{+1 year}}
 					</BOUCLE_abonnements>
