@@ -48,16 +48,34 @@
 		</div>
 <!--=== End Breadcrumbs v3 ===-->
 
-
-
 <!--=== Search Results ===-->
-		<div class="container s-results margin-bottom-50">test
+		<div class="container margin-bottom-50">
 			<ul>
-			<BOUCLE_commandes(commandes_details commandes prix_objets declinaisons){commandes.id_auteur}{commandes_details.objet=prix_objet} >
-				<li>#ID_AUTEUR #REFERENCE #ID_PRIX_OBJET #ID_DECLINAISON
-					<BOUCLE_declinaison(DECLINAISONS){id_declinaison=#ID_DECLINAISON}{tout}>
-					#TITRE #ID_DECLINAISON 2
-					</BOUCLE_declinaison>
+			<BOUCLE_commandes(COMMANDES_DETAILS commandes){commandes.id_auteur}{objet=prix_objet} {!par commandes.date}>
+				#SET{date_commande,#DATE}
+				<li>
+					[(#DESCRIPTIF*|extraire_multi)] (#REFERENCE - [(#DATE|affdate)])
+				<BOUCLE_prix(prix_objets){id_prix_objet=#ID_OBJET} {objet=article}>
+					<BOUCLE_abonnements(ARTICLES){id_article=#ID_OBJET}{page=abonnement}>
+					#TITRE
+						#SET{debut_abonnement,#GET{date_commande}}
+						#SET{fin_abonnement,#GET{date_commande}|date_future{+1 year}}
+					</BOUCLE_abonnements>
+						#SET{debut_abonnement,2000-1-1 0:00:00}
+						#SET{fin_abonnement,2200-1-1 0:00:00}
+					<//B_abonnements>
+
+					#SET{explode_titre,#TITRE|explode{' - '}}
+					#SET{extension,#GET{explode_titre}|table_valeur{1}|strtolower}
+
+					<B_documents>
+					<ul>
+					<BOUCLE_documents(DOCUMENTS){doublons}{extension=#GET{extension}} {id_article=#ID_OBJET} {date>=#GET{debut_abonnement}} {date<GET{fin_abonnement}}>
+						<li><a href="#FICHIER">[(#TITRE|sinon{[(#FICHIER|basename|couper{80})]})]</a></li>
+					</BOUCLE_documents>
+					</ul>
+					</B_documents>
+				</BOUCLE_prix>
 				</li>
 			</BOUCLE_commandes>
 			</ul>
