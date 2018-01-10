@@ -28,7 +28,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     Le contenu additionel
  */
 function notifications_commande_client_contenu_dist($id_commande, $options, $destinataire, $mode) {
-	$donnees_objet = sql_fetsel('id_objet, objet', 'spip_commandes_details', 'id_commande=' . $id_commande);
+	$donnees_objet = sql_fetsel('cd.id_objet, cd.objet',
+			'spip_commandes AS c LEFT JOIN spip_commandes_details AS cd USING(id_commande)',
+			'c.id_commande=' . $id_commande . ' AND c.statut="paye"');
 	if ($donnees_objet['objet'] == 'prix_objet') {
 		$donnes_prix = sql_fetsel(
 				'po.objet,po.id_objet,d.titre',
@@ -56,6 +58,7 @@ function notifications_commande_client_contenu_dist($id_commande, $options, $des
 				),
 			),
 		);
+		spip_log($corps, 'teste');
 		return $corps;
 	}
 }
