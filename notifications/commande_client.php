@@ -28,39 +28,36 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     Le contenu additionel
  */
 function notifications_commande_client_contenu_dist($id_commande, $options, $destinataire, $mode) {
-	$donnees_objet = sql_fetsel('cd.id_objet, cd.objet',
-			'spip_commandes AS c LEFT JOIN spip_commandes_details AS cd USING(id_commande)',
-			'c.id_commande=' . $id_commande . ' AND c.statut="paye"');
-	if ($donnees_objet['objet'] == 'prix_objet') {
-		$donnes_prix = sql_fetsel(
+	$commandes = sql_select('cd.id_objet, cd.objet',
+			'spip_commandes_details AS cd LEFT JOIN spip_commandes AS c USING(id_commande)',
+			'cd.id_commande=' . $id_commande . ' AND c.statut="paye" AND cd.objet="prix_objet"');
+	$corps = array();
+	while ($donnees_objet = sql_fetch($commandes)) {
+		$prix = sql_select(
 				'po.objet,po.id_objet,d.titre',
 				'spip_prix_objets AS po LEFT JOIN spip_declinaisons AS d USING(id_declinaison)',
 				'po.id_prix_objet=' .$donnees_objet['id_objet']);
-
-		$titre = strtolower($donnes_prix['titre']);
-		$doc = sql_fetsel('*',
-				'spip_documents_liens LEFT JOIN spip_documents USING (id_document) LEFT JOIN spip_types_documents USING(extension)',
-				'objet LIKE' . sql_quote($donnes_prix['objet']) . ' AND
-					id_objet=' . $donnes_prix['id_objet'] . ' AND
+		while ($donnees_prix = sql_fetch($prix)) {
+			$titre = strtolower($donnees_prix['titre']);
+			$doc = sql_fetsel('*',
+					'spip_documents_liens LEFT JOIN spip_documents USING (id_document) LEFT JOIN spip_types_documents USING(extension)',
+					'objet LIKE' . sql_quote($donnees_prix['objet']) . ' AND
+					id_objet=' . $donnees_prix['id_objet'] . ' AND
 					id_objet!=3830 AND
 					extension LIKE ' . sql_quote($titre));
-		$fichier = $doc['fichier'];
-		list($extension, $nom) = explode('/', $fichier);
-		$chemin = realpath(_DIR_IMG . $fichier);
+			$fichier = $doc['fichier'];
+			list($extension, $nom) = explode('/', $fichier);
+			$chemin = realpath(_DIR_IMG . $fichier);
 
-		$corps = array(
-			'pieces_jointes' => array(
-				array(
-					'chemin' => $chemin,
-					'nom' => $nom,
-					'encodage' => 'base64',
-					'mime' => $doc['mime_type']
-				),
-			),
-		);
-		spip_log($corps, 'teste');
-		return $corps;
+			$corps['pieces_jointes'][] = array(
+				'chemin' => $chemin,
+				'nom' => $nom,
+				'encodage' => 'base64',
+				'mime' => $doc['mime_type']
+			);
+		}
 	}
+	return $corps;
 }
 
 /**
